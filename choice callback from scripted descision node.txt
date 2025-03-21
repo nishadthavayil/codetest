@@ -1,0 +1,17 @@
+var fr = JavaImporter(
+org.forgerock.openam.auth.node.api.Action,
+javax.security.auth.callback.ChoiceCallback
+);
+var phoneNumbersArray = ["4444444444","5555555555","8888888888","9999999999"];
+if (callbacks.isEmpty()) 
+{
+action = fr.Action.send(
+new fr.ChoiceCallback("Please select a phone number",phoneNumbersArray,0,false)).build()
+} 
+else {
+var index = callbacks.get(0).getSelectedIndexes()[0]
+var selectedPhoneNumber = phoneNumbersArray[index]
+sharedState.put("selectedPhoneNumber", selectedPhoneNumber)
+logger.error("selected value::"+selectedPhoneNumber);  
+action = fr.Action.goTo("true").build()
+}
